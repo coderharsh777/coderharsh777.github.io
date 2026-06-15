@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harsh Suthar - Cybersecurity Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0e27;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Animated Background Grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 255, 150, 0.03) 0px,
+                rgba(0, 255, 150, 0.03) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            background: #0f1633;
+            border-bottom: 2px solid #00ff96;
+            padding: 1rem 1.5rem;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header-left {
+            color: #00ff96;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 1rem;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .status {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* Sections */
+        section {
+            padding: 3rem 1.5rem;
+            border-bottom: 1px solid rgba(0, 255, 150, 0.2);
+        }
+
+        section h2 {
+            color: #00ff96;
+            margin-bottom: 2rem;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 1.5rem;
+        }
+
+        .ascii-banner {
+            text-align: center;
+            font-size: 11px;
+            line-height: 1.2;
+            color: #00ff96;
+            overflow-x: auto;
+            margin-bottom: 2rem;
+        }
+
+        .ascii-banner pre {
+            margin: 0;
+            font-size: 11px;
+        }
+
+        .system-info {
+            background: rgba(0, 255, 150, 0.05);
+            border: 1px solid rgba(0, 255, 150, 0.2);
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 13px;
+        }
+
+        .command {
+            color: #00ff96;
+            margin-bottom: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .command:first-child {
+            margin-top: 0;
+        }
+
+        .output {
+            color: #e0e0e0;
+            margin-bottom: 1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-box {
+            background: rgba(0, 100, 255, 0.1);
+            padding: 1rem;
+            border-left: 2px solid #0064ff;
+            border-radius: 2px;
+        }
+
+        .stat-box:nth-child(2) {
+            background: rgba(255, 100, 0, 0.1);
+            border-left-color: #ff6400;
+        }
+
+        .stat-box:nth-child(3) {
+            background: rgba(100, 255, 0, 0.1);
+            border-left-color: #64ff00;
+        }
+
+        .stat-label {
+            font-weight: bold;
+            font-size: 12px;
+            color: #0064ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-box:nth-child(2) .stat-label {
+            color: #ff6400;
+        }
+
+        .stat-box:nth-child(3) .stat-label {
+            color: #64ff00;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            color: #00ff96;
+            margin-top: 0.5rem;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 13px;
+        }
+
+        /* Projects */
+        .project {
+            background: rgba(0, 255, 150, 0.08);
+            border-left: 3px solid #00ff96;
+            border-bottom: 1px solid rgba(0, 255, 150, 0.2);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+        }
+
+        .project.project-orange {
+            background: rgba(255, 100, 0, 0.08);
+            border-left-color: #ff6400;
+        }
+
+        .project.project-lime {
+            background: rgba(100, 255, 0, 0.08);
+            border-left-color: #64ff00;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            color: #00ff96;
+            font-size: 16px;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .project.project-orange .project-title {
+            color: #ff6400;
+        }
+
+        .project.project-lime .project-title {
+            color: #64ff00;
+        }
+
+        .project-subtitle {
+            color: #888;
+            margin: 0;
+            font-size: 12px;
+        }
+
+        .status-badge {
+            background: rgba(0, 255, 150, 0.2);
+            color: #00ff96;
+            padding: 4px 8px;
+            border-radius: 2px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .project.project-orange .status-badge {
+            background: rgba(255, 100, 0, 0.2);
+            color: #ff6400;
+        }
+
+        .project.project-lime .status-badge {
+            background: rgba(100, 255, 0, 0.2);
+            color: #64ff00;
+        }
+
+        .project-desc {
+            color: #b0b0b0;
+            margin: 0 0 1rem 0;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: rgba(0, 100, 255, 0.3);
+            color: #0064ff;
+            padding: 4px 10px;
+            border-radius: 2px;
+            font-size: 11px;
+        }
+
+        .project.project-orange .tag {
+            background: rgba(255, 100, 0, 0.3);
+            color: #ff9955;
+        }
+
+        .project.project-lime .tag {
+            background: rgba(100, 255, 0, 0.3);
+            color: #64ff00;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .skill-category {
+            margin-bottom: 2rem;
+        }
+
+        .skill-header {
+            font-weight: bold;
+            font-size: 12px;
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: rgba(0, 100, 255, 0.2);
+            padding: 4px 8px;
+            border-radius: 2px;
+        }
+
+        .skill-category:nth-child(2n) .skill-header {
+            background: rgba(255, 100, 0, 0.2);
+            color: #ff6400;
+        }
+
+        .skill-category:nth-child(3n) .skill-header {
+            background: rgba(100, 255, 0, 0.2);
+            color: #64ff00;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .skill-item {
+            padding-left: 1rem;
+            border-left: 2px solid #0064ff;
+        }
+
+        .skill-category:nth-child(2n) .skill-item {
+            border-left-color: #ff6400;
+        }
+
+        .skill-category:nth-child(3n) .skill-item {
+            border-left-color: #64ff00;
+        }
+
+        .skill-item span {
+            color: #00ff96;
+        }
+
+        /* Certifications */
+        .cert-item {
+            background: rgba(0, 255, 150, 0.05);
+            border: 1px solid rgba(0, 255, 150, 0.3);
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .cert-item:nth-child(2) {
+            background: rgba(100, 255, 0, 0.05);
+            border-color: rgba(100, 255, 0, 0.3);
+        }
+
+        .cert-item:nth-child(3) {
+            background: rgba(0, 100, 255, 0.05);
+            border-color: rgba(0, 100, 255, 0.3);
+        }
+
+        .cert-title {
+            color: #00ff96;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .cert-item:nth-child(2) .cert-title {
+            color: #64ff00;
+        }
+
+        .cert-item:nth-child(3) .cert-title {
+            color: #0064ff;
+        }
+
+        .cert-info {
+            color: #888;
+            font-size: 12px;
+        }
+
+        /* Education */
+        .edu-box {
+            background: rgba(0, 255, 150, 0.05);
+            border: 1px solid rgba(0, 255, 150, 0.2);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+
+        .edu-box:nth-child(2) {
+            background: rgba(100, 255, 0, 0.05);
+            border-color: rgba(100, 255, 0, 0.2);
+        }
+
+        .edu-title {
+            color: #00ff96;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .edu-box:nth-child(2) .edu-title {
+            color: #64ff00;
+        }
+
+        .edu-school {
+            color: #b0b0b0;
+            margin: 0 0 0.25rem 0;
+        }
+
+        .edu-status {
+            color: #888;
+            font-size: 12px;
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 2px solid #00ff96;
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        a {
+            color: #00ff96;
+            text-decoration: none;
+            border-bottom: 1px solid #00ff96;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: #00ff96;
+            text-shadow: 0 0 10px rgba(0, 255, 150, 0.5);
+            border-bottom-color: rgba(0, 255, 150, 0.5);
+        }
+
+        .footer-text {
+            color: #888;
+            font-size: 12px;
+        }
+
+        .footer-text .online {
+            color: #00ff96;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ascii-banner pre {
+                font-size: 9px;
+                display: none;
+            }
+
+            .ascii-banner {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="header-left">
+                ┌─ root@harsh-system │ SECURITY_PROTOCOLS.sh
+            </div>
+            <div class="header-right">
+                <span class="status">● ACTIVE</span>
+                <span class="status">█ 100%</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="ascii-banner">
+                <pre>
+ ╔═══════════════════════════════════════════════════╗
+ ║   ██╗  ██╗ █████╗ ██████╗ ███████╗██╗  ██╗      ║
+ ║   ██║  ██║██╔══██╗██╔══██╗██╔════╝██║  ██║      ║
+ ║   ███████║███████║██████╔╝███████╗███████║      ║
+ ║   ██╔══██║██╔══██║██╔══██╗╚════██║██╔══██║      ║
+ ║   ██║  ██║██║  ██║██║  ██║███████║██║  ██║      ║
+ ║   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝      ║
+ ║                                                   ║
+ ║         CYBERSECURITY THREAT ANALYST              ║
+ ║         STATUS: [█████████████] 100% LOADED       ║
+ ╚═══════════════════════════════════════════════════╝
+                </pre>
+            </div>
+
+            <div class="system-info">
+                <div class="command">$ whoami</div>
+                <p class="output">Harsh Suthar | Cybersecurity Student | Threat Intelligence Specialist</p>
+                
+                <div class="command">$ cat /home/harsh/location.txt</div>
+                <p class="output">Ahmedabad, Gujarat | 9998451110 | harsh007suthar@gmail.com</p>
+
+                <div class="command">$ ls -la security_profile/</div>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">PROJECTS</div>
+                        <div class="stat-number">3</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">CERTS</div>
+                        <div class="stat-number">3</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">SKILLS</div>
+                        <div class="stat-number">8</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-info">
+                <a href="mailto:harsh007suthar@gmail.com">📧 Email</a>
+                <a href="https://www.linkedin.com/in/harsh-suthar-a1296a230" target="_blank">💼 LinkedIn</a>
+                <a href="https://github.com/coderharsh777" target="_blank">💻 GitHub</a>
+                <a href="https://tryhackme.com/p/HARSHSUTHAR" target="_blank">🎯 TryHackMe</a>
+                <a href="tel:9998451110">📱 Phone</a>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section>
+            <h2>$ cat ./projects/active_threats</h2>
+
+            <!-- Project 1 -->
+            <div class="project">
+                <div class="project-header">
+                    <div>
+                        <h3 class="project-title">THREAT-PULSE</h3>
+                        <p class="project-subtitle">Full-stack Threat Intelligence Platform</p>
+                    </div>
+                    <div class="status-badge">ACTIVE</div>
+                </div>
+                <p class="project-desc">SOC-level threat analytics using publicly available data. Real-time threat detection, pattern matching, and intelligence correlation.</p>
+                <div class="tags">
+                    <span class="tag">Threat Intelligence</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">Data Analysis</span>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project project-orange">
+                <div class="project-header">
+                    <div>
+                        <h3 class="project-title">AUTO CODE FIXER</h3>
+                        <p class="project-subtitle">Security-Focused Compiler Simulation</p>
+                    </div>
+                    <div class="status-badge">ACTIVE</div>
+                </div>
+                <p class="project-desc">Automated vulnerability detection & remediation. Static code analysis with regex pattern matching for C/C++ security flaws.</p>
+                <div class="tags">
+                    <span class="tag">Static Analysis</span>
+                    <span class="tag">C/C++</span>
+                    <span class="tag">Vuln Detection</span>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project project-lime">
+                <div class="project-header">
+                    <div>
+                        <h3 class="project-title">AI HONEYPOT SYSTEM</h3>
+                        <p class="project-subtitle">Intelligent Threat Detection Dashboard</p>
+                    </div>
+                    <div class="status-badge">ACTIVE</div>
+                </div>
+                <p class="project-desc">Emulated vulnerable services (SSH, HTTP) to decoy and analyze attackers in real-time. AI-powered threat intelligence dashboard.</p>
+                <div class="tags">
+                    <span class="tag">Honeypot</span>
+                    <span class="tag">AI/ML</span>
+                    <span class="tag">Real-time</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section>
+            <h2>$ ls ./arsenal/tools</h2>
+            <div class="skills-grid">
+                <!-- Column 1 -->
+                <div>
+                    <div class="skill-category">
+                        <div class="skill-header">NETWORKING</div>
+                        <div class="skill-list">
+                            <div class="skill-item"><span>▶ Cisco Packet Tracer</span></div>
+                            <div class="skill-item"><span>▶ Wireshark</span></div>
+                            <div class="skill-item"><span>▶ Nmap</span></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-header">OPERATING SYSTEMS</div>
+                        <div class="skill-list">
+                            <div class="skill-item"><span>▶ Kali Linux</span></div>
+                            <div class="skill-item"><span>▶ Ubuntu</span></div>
+                            <div class="skill-item"><span>▶ Windows Server 2019</span></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-header">DIGITAL FORENSICS</div>
+                        <div class="skill-list">
+                            <div class="skill-item"><span>▶ Autopsy</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2 -->
+                <div>
+                    <div class="skill-category">
+                        <div class="skill-header">PROGRAMMING</div>
+                        <div class="skill-list">
+                            <div class="skill-item"><span>▶ Python</span></div>
+                            <div class="skill-item"><span>▶ PHP</span></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-header">RED TEAMING</div>
+                        <div class="skill-list">
+                            <div class="skill-item"><span>▶ Burp Suite</span></div>
+                            <div class="skill-item"><span>▶ Metasploit</span></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-header">OSINT</div>
+                        <div class="skill-list">
+                            <div class="skill-item"><span>▶ Reconnaissance</span></div>
+                            <div class="skill-item"><span>▶ Open Source Intelligence</span></div>
+                            <div class="skill-item"><span>▶ Data Gathering</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section>
+            <h2>$ cat ./credentials/certifications</h2>
+
+            <div class="cert-item">
+                <div class="cert-title">► [VERIFIED] Certified Cybersecurity Educator Professional (CCEP)</div>
+                <div class="cert-info">Status: ACTIVE | Type: Professional Credential</div>
+            </div>
+
+            <div class="cert-item">
+                <div class="cert-title">► [VERIFIED] Mastering Cyber Threat Intelligence for SOC Analysts</div>
+                <div class="cert-info">Status: ACTIVE | Focus: Advanced Threat Analysis</div>
+            </div>
+
+            <div class="cert-item">
+                <div class="cert-title">► [VERIFIED] Introduction to CIP</div>
+                <div class="cert-info">Status: ACTIVE | Focus: Critical Infrastructure Protection</div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section>
+            <h2>$ grep -r "education" ./profile</h2>
+
+            <div class="edu-box">
+                <div class="edu-title">B.TECH - Computer Science & Engineering (Cyber Security)</div>
+                <div class="edu-school">Rashtriya Raksha University, Gandhinagar, Gujarat</div>
+                <div class="edu-status">Status: CURRENTLY PURSUING</div>
+            </div>
+
+            <div class="edu-box">
+                <div class="edu-title">DIPLOMA - Computer Engineering</div>
+                <div class="edu-school">Apollo Institute of Engineering and Technology, Ahmedabad, Gujarat</div>
+                <div class="edu-status">Status: COMPLETED | Date: June 2024</div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <section class="footer">
+            <h2>$ contact --secure</h2>
+            <div class="links">
+                <a href="mailto:harsh007suthar@gmail.com">📧 Email</a>
+                <a href="https://www.linkedin.com/in/harsh-suthar-a1296a230" target="_blank">💼 LinkedIn</a>
+                <a href="https://github.com/coderharsh777" target="_blank">💻 GitHub</a>
+                <a href="https://tryhackme.com/p/HARSHSUTHAR" target="_blank">🎯 TryHackMe</a>
+                <a href="tel:9998451110">📱 Phone</a>
+            </div>
+            <div class="footer-text">
+                <div>root@harsh-system ~ $</div>
+                <div class="online">[SYSTEM STATUS: █████████████ 100% ONLINE]</div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
