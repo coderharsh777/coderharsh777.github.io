@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harsh Suthar | OSINT & Cyber Threat Intelligence</title>
+<meta name="description" content="Portfolio of Harsh Suthar, cybersecurity student focused on OSINT and cyber threat intelligence.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Chakra+Petch:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --accent:#39FF88;
+  --cyan:#00E5FF;
+  --red:#FF3B5C;
+  --amber:#FFB000;
+  --bg:#02070A;
+  --text:#D7FFE9;
+  --soft:#B6D8C8;
+  --muted:#7FA896;
+  --white:#F2FFF8;
+  --line:rgba(57,255,136,0.25);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'JetBrains Mono',ui-monospace,monospace;font-size:15px;line-height:1.65}
+a{color:var(--cyan)}
+a:hover{color:#8CF3FF}
+h1,h2,h3{margin:0}
+.page{position:relative;overflow:hidden;min-height:100vh}
+.rain{position:absolute;left:0;top:0;width:100%;height:760px;overflow:hidden;
+  background-image:radial-gradient(ellipse at 75% 30%,rgba(0,229,255,0.10),transparent 60%),radial-gradient(ellipse at 10% 0%,rgba(57,255,136,0.12),transparent 55%)}
+.rain div{position:absolute;width:28px;white-space:pre;font-size:16px;line-height:20px;color:var(--accent);text-align:center}
+.scan{position:absolute;inset:0;pointer-events:none;
+  background-image:repeating-linear-gradient(0deg,rgba(0,0,0,0.22) 0,rgba(0,0,0,0.22) 1px,transparent 1px,transparent 3px),radial-gradient(ellipse at center,transparent 60%,rgba(0,0,0,0.55) 100%)}
+.wrap{position:relative;max-width:1200px;margin:0 auto;padding:0 32px 72px}
+
+/* top bar */
+.top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding:20px 0;border-bottom:1px solid var(--line);font-size:13px}
+.brand{font-family:'Chakra Petch',sans-serif;font-weight:700;letter-spacing:3px;color:var(--accent);font-size:18px}
+.top-left{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
+.tlp{border:1px solid var(--cyan);color:var(--cyan);padding:1px 10px;letter-spacing:2px}
+.live{color:var(--muted)}
+.live i{font-style:normal;color:var(--red);animation:blink 1.4s steps(1) infinite}
+.nav{display:flex;flex-wrap:wrap;gap:4px 24px}
+.nav a{text-decoration:none;padding:10px 0}
+
+/* hero */
+.hero{display:flex;flex-wrap:wrap;gap:40px;align-items:center;padding:56px 0 48px}
+.hero-l{flex:1 1 560px;min-width:0}
+.boot{background:rgba(2,12,10,0.82);border:1px solid rgba(57,255,136,0.3);padding:16px 20px;font-size:13.5px;line-height:1.8;color:var(--muted);max-width:520px}
+.boot b{font-weight:400;color:var(--accent)}
+.cursor{color:var(--accent);animation:blink 1s steps(1) infinite}
+h1{margin:28px 0 12px;font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:92px;line-height:.96;letter-spacing:2px;color:var(--white);
+  text-shadow:4px 0 rgba(255,59,92,0.75),-4px 0 rgba(0,229,255,0.75),0 0 28px rgba(57,255,136,0.35)}
+.role{font-family:'Chakra Petch',sans-serif;font-size:24px;letter-spacing:3px;color:var(--accent)}
+.lead{margin:16px 0 0;color:var(--soft);max-width:540px;font-size:16px}
+.btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;min-height:48px;padding:0 26px;font-weight:700;text-decoration:none;border:1px solid var(--accent)}
+.btn.solid{background:var(--accent);color:#02150B}
+.btn.solid:hover{color:#02150B;filter:brightness(1.1)}
+.btn.ghost{color:var(--accent)}
+.btn.ghost:hover{color:var(--white);background:rgba(57,255,136,0.12)}
+
+/* graph */
+.graph{flex:1 1 420px;min-width:0;max-width:560px;border:1px solid rgba(0,229,255,0.35);background:rgba(2,12,16,0.85);padding:14px 14px 10px;box-shadow:0 0 40px rgba(0,229,255,0.12)}
+.graph-h{display:flex;justify-content:space-between;font-size:12px;letter-spacing:2px;color:var(--cyan);padding:0 4px 8px}
+.graph-h span+span{color:var(--muted)}
+.graph svg{display:block;width:100%;height:auto}
+.pulse{transform-origin:260px 220px;animation:pulse 2.4s ease-out infinite}
+
+/* ticker */
+.ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(2,12,10,0.8);overflow:hidden;display:flex;align-items:center;font-size:13px}
+.ticker-tag{flex:none;padding:12px 18px;background:var(--accent);color:#02150B;font-weight:700;letter-spacing:2px}
+.ticker-view{flex:1;min-width:0;overflow:hidden}
+.ticker-track{display:flex;width:max-content;animation:ticker 48s linear infinite}
+.ticker-track span{flex:none;padding:12px 28px;white-space:nowrap;color:var(--soft)}
+.ticker-track em{font-style:normal}
+.ticker-track small{font-size:inherit;color:#5F8575}
+
+/* sections */
+section{padding-top:72px}
+.sh{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px;margin-bottom:26px}
+.sh h2{font-family:'Chakra Petch',sans-serif;font-size:42px;letter-spacing:3px;color:var(--white)}
+.sh span{color:var(--muted)}
+.sh::after{content:"";flex:1;min-width:40px;height:1px;background:var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:24px}
+.card{flex:1 1 320px;min-width:0;border:1px solid rgba(57,255,136,0.3);background:rgba(5,18,16,0.9);display:flex;flex-direction:column}
+.card-h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 20px;background:rgba(57,255,136,0.10);border-bottom:1px solid rgba(57,255,136,0.3);font-size:12px;letter-spacing:1.5px}
+.card-h span:first-child{color:var(--accent)}
+.card-h span:last-child{color:var(--cyan)}
+.card-b{padding:24px 24px 22px;display:flex;flex-direction:column;gap:12px;flex:1}
+.card-b h3{font-family:'Chakra Petch',sans-serif;font-size:28px;letter-spacing:1px;color:var(--white)}
+.status{font-size:12px;letter-spacing:1.5px;color:var(--amber)}
+.card-b p{margin:0;color:var(--soft);font-size:14.5px}
+.tags{color:var(--muted);font-size:12.5px;margin-top:auto}
+.more{font-weight:700;text-decoration:none;padding:8px 0}
+
+.steps{display:flex;flex-wrap:wrap;gap:16px}
+.step{flex:1 1 200px;min-width:0;border:1px solid rgba(0,229,255,0.35);background:rgba(2,12,16,0.85);padding:20px}
+.step .n{font-family:'Chakra Petch',sans-serif;font-size:34px;font-weight:700;color:var(--cyan);line-height:1}
+.step .t{font-weight:700;letter-spacing:2px;font-size:13px;color:var(--white);margin:10px 0 6px}
+.step p{margin:0;color:var(--soft);font-size:14px}
+
+.amber{border:1px solid rgba(255,176,0,0.55);background:rgba(24,16,2,0.55);padding:26px 28px;display:flex;flex-wrap:wrap;gap:20px 44px}
+.amber .meta{flex:0 1 260px;color:var(--soft)}
+.amber .badge{display:inline-block;border:1px solid var(--amber);color:var(--amber);padding:1px 10px;font-size:12px;letter-spacing:2px;margin-bottom:10px}
+.amber .body{flex:1 1 400px;min-width:0}
+.amber .title{font-family:'Chakra Petch',sans-serif;font-size:28px;color:var(--white);letter-spacing:1px}
+.amber p{margin:6px 0 14px;color:var(--soft)}
+.redact{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.redact i{display:inline-block;height:18px;background:#000;border:1px solid #3A3320}
+.redact small{font-size:13px;color:var(--amber)}
+
+.box{flex:1 1 240px;min-width:0;border:1px solid rgba(57,255,136,0.3);background:rgba(5,18,16,0.9);padding:20px 22px}
+.box.wide{flex-basis:400px;padding:22px 26px}
+.box h4{margin:0 0 10px;color:var(--accent);font-weight:700;letter-spacing:2px;font-size:12.5px}
+.box div{color:var(--soft);font-size:14.5px;line-height:1.9}
+.box.wide div{line-height:1.65;padding:5px 0;color:var(--text);font-size:15px}
+.box.wide span{color:var(--muted)}
+.mt{margin-top:24px}
+
+.contact{border:2px solid var(--accent);background:rgba(5,18,16,0.9);padding:40px 36px;display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between;align-items:center;box-shadow:0 0 50px rgba(57,255,136,0.15)}
+.contact .c-l{flex:1 1 380px}
+.contact .k{font-size:12.5px;letter-spacing:3px;color:var(--cyan)}
+.contact .big{font-family:'Chakra Petch',sans-serif;font-size:44px;line-height:1.1;color:var(--white);margin-top:8px}
+.contact .sub{color:var(--soft);margin-top:10px}
+.links{display:flex;flex-wrap:wrap;gap:6px 26px}
+.links a{padding:12px 0;font-weight:700}
+footer{padding-top:26px;color:#5F8575;font-size:13px}
+
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes pulse{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.9);opacity:0}}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important}
+  html{scroll-behavior:auto}
+}
+@media (max-width:640px){
+  h1{font-size:56px}
+  .role{font-size:18px}
+  .sh h2{font-size:32px}
+  .contact .big{font-size:32px}
+  .wrap{padding:0 20px 56px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="rain" id="rain" aria-hidden="true"></div>
+
+<div class="wrap">
+
+<header class="top">
+  <div class="top-left">
+    <span class="brand">HS//INTEL-OPS</span>
+    <span class="tlp">TLP:CLEAR</span>
+    <span class="live"><i>&#9679;</i> LIVE</span>
+  </div>
+  <nav class="nav" aria-label="Main">
+    <a href="#reports">./reports</a>
+    <a href="#cycle">./method</a>
+    <a href="#dossier">./dossier</a>
+    <a href="#channel">./contact</a>
+  </nav>
+</header>
+
+<main>
+<div class="hero">
+  <div class="hero-l">
+    <div class="boot" aria-hidden="true">
+      <div><b>&gt;</b> init portfolio --tlp clear</div>
+      <div><b>[ OK ]</b> loading osint modules</div>
+      <div><b>[ OK ]</b> threat feeds synced (sample)</div>
+      <div><b>[ OK ]</b> analyst online<span class="cursor">&#9608;</span></div>
+    </div>
+    <h1>HARSH<br>SUTHAR</h1>
+    <div class="role">OSINT ANALYST &middot; CYBER THREAT INTELLIGENCE</div>
+    <p class="lead">Cybersecurity student who turns open-source data into intelligence people can act on. Based in Ahmedabad, India.</p>
+    <div class="btns">
+      <a class="btn solid" href="#reports">OPEN REPORTS</a>
+      <a class="btn ghost" href="#channel">SECURE CHANNEL</a>
+    </div>
+  </div>
+
+  <div class="graph">
+    <div class="graph-h"><span>LINK ANALYSIS</span><span>NODES 7 &middot; EDGES 12</span></div>
+    <svg viewBox="0 0 520 440" role="img" aria-label="Link analysis graph connecting Harsh to OSINT, CTI, VAPT, Python, Linux and Networks">
+      <g stroke="rgba(57,255,136,0.55)" stroke-width="1.5">
+        <line x1="260" y1="220" x2="260" y2="62"/><line x1="260" y1="220" x2="399" y2="140"/><line x1="260" y1="220" x2="399" y2="300"/><line x1="260" y1="220" x2="260" y2="378"/><line x1="260" y1="220" x2="121" y2="300"/><line x1="260" y1="220" x2="121" y2="140"/>
+      </g>
+      <g stroke="rgba(0,229,255,0.45)" stroke-width="1" stroke-dasharray="4 5">
+        <line x1="260" y1="62" x2="399" y2="140"/><line x1="399" y1="140" x2="399" y2="300"/><line x1="399" y1="300" x2="260" y2="378"/><line x1="260" y1="378" x2="121" y2="300"/><line x1="121" y1="300" x2="121" y2="140"/><line x1="121" y1="140" x2="260" y2="62"/>
+      </g>
+      <g fill="#02070A" stroke="#39FF88" stroke-width="1.8">
+        <circle cx="260" cy="62" r="38"/><circle cx="399" cy="140" r="38"/><circle cx="399" cy="300" r="38"/><circle cx="260" cy="378" r="38"/><circle cx="121" cy="300" r="38"/><circle cx="121" cy="140" r="38"/>
+      </g>
+      <circle class="pulse" cx="260" cy="220" r="46" fill="none" stroke="#39FF88" stroke-width="2"/>
+      <circle cx="260" cy="220" r="46" fill="#06241A" stroke="#39FF88" stroke-width="2.5"/>
+      <g font-family="JetBrains Mono, monospace" text-anchor="middle" fill="#D7FFE9">
+        <text x="260" y="228" font-size="22" font-weight="700" fill="#F2FFF8">HS</text>
+        <text x="260" y="66" font-size="12">OSINT</text><text x="399" y="144" font-size="12">CTI</text><text x="399" y="304" font-size="12">VAPT</text><text x="260" y="382" font-size="12">PYTHON</text><text x="121" y="304" font-size="12">LINUX</text><text x="121" y="144" font-size="11">NETWORKS</text>
+      </g>
+      <g fill="#FF3B5C"><circle cx="460" cy="60" r="4"/><circle cx="52" cy="392" r="4"/></g>
+      <g fill="#00E5FF"><circle cx="478" cy="396" r="3"/><circle cx="40" cy="60" r="3"/><circle cx="500" cy="220" r="3"/></g>
+    </svg>
+  </div>
+</div>
+
+<div class="ticker" aria-label="Sample indicator feed">
+  <div class="ticker-tag">IOC FEED</div>
+  <div class="ticker-view">
+    <div class="ticker-track" id="track">
+      <span><em style="color:#FF3B5C">[IOC]</em> 198.51.100.23 suspicious scan activity <small>&middot; SAMPLE</small></span>
+      <span><em style="color:#FFB000">[DOMAIN]</em> login-update.example.net phishing pattern <small>&middot; SAMPLE</small></span>
+      <span><em style="color:#FF3B5C">[HASH]</em> 9f2c...e41a unknown malware family <small>&middot; SAMPLE</small></span>
+      <span><em style="color:#00E5FF">[ALERT]</em> honeypot hit: SSH brute force attempt <small>&middot; SAMPLE</small></span>
+      <span><em style="color:#39FF88">[INTEL]</em> new OSINT source indexed <small>&middot; SAMPLE</small></span>
+      <span><em style="color:#FFB000">[CVE]</em> watchlist entry updated <small>&middot; SAMPLE</small></span>
+    </div>
+  </div>
+</div>
+
+<section id="reports">
+  <div class="sh"><h2>INTEL REPORTS</h2><span>// 3 projects on file</span></div>
+  <div class="row">
+    <article class="card">
+      <div class="card-h"><span>REPORT-001</span><span>TLP:CLEAR</span></div>
+      <div class="card-b">
+        <h3>THREAT-PULSE</h3>
+        <div class="status">STATUS: ACTIVE</div>
+        <p>Full-stack threat intelligence platform for SOC-style analytics, built on public data sources.</p>
+        <div class="tags">Threat Intelligence · Python · Data Analysis</div>
+        <a class="more" href="#">READ FULL REPORT &rarr;</a>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-h"><span>REPORT-002</span><span>TLP:CLEAR</span></div>
+      <div class="card-b">
+        <h3>AUTO CODE FIXER</h3>
+        <div class="status">STATUS: COMPLETE</div>
+        <p>Security-focused compiler simulation that uses regex-based static analysis to find and suggest fixes for C/C++ flaws.</p>
+        <div class="tags">Static Analysis · C/C++ · Vuln Detection</div>
+        <a class="more" href="#">READ FULL REPORT &rarr;</a>
+      </div>
+    </article>
+    <article class="card">
+      <div class="card-h"><span>REPORT-003</span><span>TLP:CLEAR</span></div>
+      <div class="card-b">
+        <h3>AI HONEYPOT SYSTEM</h3>
+        <div class="status">STATUS: ACTIVE</div>
+        <p>Emulated SSH and HTTP services that decoy and log attackers, with an AI-powered dashboard.</p>
+        <div class="tags">Honeypot · AI/ML · Real-time</div>
+        <a class="more" href="#">READ FULL REPORT &rarr;</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="cycle">
+  <div class="sh"><h2>HOW I WORK</h2><span>// the intelligence cycle</span></div>
+  <div class="steps">
+    <div class="step"><div class="n">01</div><div class="t">DIRECTION</div><p>Define the question and what needs to be known.</p></div>
+    <div class="step"><div class="n">02</div><div class="t">COLLECTION</div><p>Gather open-source data from public sources.</p></div>
+    <div class="step"><div class="n">03</div><div class="t">PROCESSING</div><p>Clean and structure it with Python and Linux tooling.</p></div>
+    <div class="step"><div class="n">04</div><div class="t">ANALYSIS</div><p>Connect the dots and separate signal from noise.</p></div>
+    <div class="step"><div class="n">05</div><div class="t">DISSEMINATION</div><p>Share findings through reports and dashboards.</p></div>
+  </div>
+</section>
+
+<section id="dossier">
+  <div class="sh"><h2>DOSSIER</h2><span>// background, tools, credentials</span></div>
+
+  <div class="amber">
+    <div class="meta"><span class="badge">TLP:AMBER</span><br>SEP 2026 &ndash; NOV 2026<br>Cyber Centre of Excellence, Gujarat</div>
+    <div class="body">
+      <div class="title">Cyber Security Intern</div>
+      <p>Supporting OSINT, vulnerability assessment and network security work in a confidential environment.</p>
+      <div class="redact"><i style="width:130px"></i><i style="width:80px"></i><i style="width:190px"></i><small>[ REDACTED &middot; details restricted ]</small></div>
+    </div>
+  </div>
+
+  <div class="row mt">
+    <div class="box"><h4>NETWORKING</h4><div>Wireshark · Nmap · Packet Tracer</div></div>
+    <div class="box"><h4>SYSTEMS</h4><div>Kali Linux · Ubuntu · Windows Server 2019</div></div>
+    <div class="box"><h4>OFFENSIVE</h4><div>Burp Suite · Metasploit</div></div>
+    <div class="box"><h4>INTEL &amp; FORENSICS</h4><div>Autopsy · OSINT tooling · Python · PHP</div></div>
+  </div>
+
+  <div class="row mt">
+    <div class="box wide">
+      <h4>CERTIFICATIONS</h4>
+      <div>Certified Cybersecurity Educator Professional (CCEP)</div>
+      <div>Mastering Cyber Threat Intelligence for SOC Analysts</div>
+      <div>OSINTCon 2025 &middot; participant</div>
+    </div>
+    <div class="box wide">
+      <h4>EDUCATION</h4>
+      <div>B.Tech, Computer Science &amp; Engineering (Cyber Security)<br><span>Rashtriya Raksha University &middot; 2024 &ndash; present</span></div>
+      <div>Diploma, Computer Engineering<br><span>Apollo Institute of Engineering and Technology &middot; 2021 &ndash; 2024</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="channel">
+  <div class="contact">
+    <div class="c-l">
+      <div class="k">&gt; OPEN SECURE CHANNEL</div>
+      <div class="big">Got something to investigate?</div>
+      <div class="sub">Open to entry-level OSINT, CTI and security analyst roles.</div>
+    </div>
+    <div class="links">
+      <!-- TODO: replace with your real email -->
+      <a href="mailto:YOUR_EMAIL@example.com">email</a>
+      <a href="https://www.linkedin.com/in/harshsuthar-" target="_blank" rel="noopener">linkedin</a>
+      <a href="https://github.com/coderharsh777" target="_blank" rel="noopener">github</a>
+      <!-- TODO: replace # with your TryHackMe profile URL -->
+      <a href="#">tryhackme</a>
+    </div>
+  </div>
+  <footer>&copy; 2026 Harsh Suthar &middot; Ahmedabad, Gujarat &middot; feed entries above are sample data</footer>
+</section>
+</main>
+
+</div>
+
+<div class="scan" aria-hidden="true"></div>
+</div>
+
+<script>
+// Falling-code background (decorative)
+(function () {
+  var rain = document.getElementById('rain');
+  var chars = '01{}[]<>/|$#@*+=ABCDEF0123456789';
+  var seed = 20261031;
+  function rnd() { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; }
+  var count = Math.ceil(window.innerWidth / 28) + 1;
+  for (var i = 0; i < count; i++) {
+    var len = 10 + Math.floor(rnd() * 16), text = '';
+    for (var j = 0; j < len; j++) text += chars[Math.floor(rnd() * chars.length)] + '\n';
+    var d = document.createElement('div');
+    d.textContent = text.trim();
+    d.style.left = (i * 28) + 'px';
+    d.style.top = (Math.floor(rnd() * 260) - 140) + 'px';
+    d.style.opacity = (0.07 + rnd() * 0.2).toFixed(2);
+    rain.appendChild(d);
+  }
+  // Duplicate ticker content for a seamless loop
+  var track = document.getElementById('track');
+  track.innerHTML += track.innerHTML;
+})();
+</script>
+</body>
+</html>
